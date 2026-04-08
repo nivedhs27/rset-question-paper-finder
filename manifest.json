@@ -13,17 +13,26 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": [
+        "*://student.rajagiritech.ac.in/*"
+      ],
+      "js": [
+        "content.js"
+      ]
     }
   ],
   "host_permissions": [
-    "<all_urls>"
+    "*://student.rajagiritech.ac.in/*"
   ],
   "browser_specific_settings": {
     "gecko": {
       "id": "qpaperfilter@example.com",
-      "strict_min_version": "109.0"
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
     }
   }
 }
