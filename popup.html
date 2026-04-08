@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Filter</title>
+  <style>
+    /* Clean, modern, auto-scaling UI */
+    :root {
+      --bg-color: #f8fafc;
+      --surface: #ffffff;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 8px;
+    }
+    body {
+      width: 320px;
+      margin: 0;
+      padding: 16px;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: var(--text-main);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      margin-bottom: 12px;
+      position: relative;
+    }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      margin-bottom: 4px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    select, input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-sizing: border-box;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    select:focus, input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+    button {
+      width: 100%;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: var(--primary-hover);
+    }
+    .suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-bottom-left-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 10;
+      display: none;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .suggestion-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .suggestion-item:hover {
+      background-color: #f1f5f9;
+    }
+    .results {
+      margin-top: 16px;
+    }
+    .result-item {
+      background: var(--surface);
+      padding: 12px;
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    .result-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 4px;
+      text-transform: capitalize;
+    }
+    .result-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .result-link {
+      display: inline-block;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .result-link:hover {
+      text-decoration: underline;
+    }
+    .empty {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      padding: 16px 0;
+    }
+    #loading {
+      display: none;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--primary);
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Smart Filter</h2>
+  
+  <div class="form-group">
+    <label for="semester">Semester</label>
+    <select id="semester">
+      <option value="All">All Semesters</option>
+      <option value="S1">S1</option>
+      <option value="S2">S2</option>
+      <option value="S3">S3</option>
+      <option value="S4">S4</option>
+      <option value="S5">S5</option>
+      <option value="S6">S6</option>
+      <option value="S7">S7</option>
+      <option value="S8">S8</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" placeholder="e.g. oper sys" autocomplete="off">
+    <div id="suggestions" class="suggestions"></div>
+  </div>
+
+  <button id="searchBtn">Find Papers</button>
+
+  <div id="loading">Searching...</div>
+
+  <div class="results" id="results">
+    <!-- Results dynamically injected here -->
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

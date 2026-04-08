@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Smart Question Paper Filter",
+  "version": "1.0",
+  "description": "Extracts, cleans, and intelligently filters question papers from college websites.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Filter Papers"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "qpaperfilter@example.com",
+      "strict_min_version": "109.0"
+    }
+  }
+}
